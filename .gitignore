@@ -1,0 +1,24 @@
+# Binaries
+/harness
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Runtime artifacts
+/runs/
+/examples/runs/
+/examples/workspace/
+/examples/workspace-*/
+
+# Local secrets and env
+.env
+*.env
+*.local
+
+# Logs and temp files
+*.log
+*.tmp
+.DS_Store
+.idea/
+.vscode/
