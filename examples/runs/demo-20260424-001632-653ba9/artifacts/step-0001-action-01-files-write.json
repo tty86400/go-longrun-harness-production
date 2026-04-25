@@ -1,0 +1,23 @@
+{
+  "action": {
+    "tool": "files.write",
+    "args": {
+      "content": "hello from production harness\n",
+      "create_dirs": true,
+      "path": "demo.txt"
+    },
+    "reason": "Seed the workspace with a verifiable artifact.",
+    "timeout_seconds": 10
+  },
+  "duration_ms": 0,
+  "result": {
+    "ok": true,
+    "summary": "file written",
+    "files": [
+      "demo.txt"
+    ],
+    "metadata": {
+      "bytes": 29
+    }
+  }
+}

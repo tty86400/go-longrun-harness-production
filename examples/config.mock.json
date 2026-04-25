@@ -1,0 +1,65 @@
+{
+  "run": {
+    "id_prefix": "demo",
+    "workspace": "./workspace",
+    "runs_dir": "./runs",
+    "persist_prompts": true,
+    "persist_provider_io": true
+  },
+  "prompt": {
+    "language": "zh-CN"
+  },
+  "loop": {
+    "max_steps": 8,
+    "max_actions_per_step": 2,
+    "step_timeout_seconds": 60,
+    "max_wall_clock_minutes": 30,
+    "max_consecutive_failures": 3
+  },
+  "review": {
+    "every_n_steps": 2
+  },
+  "memory": {
+    "recent_events": 12,
+    "estimated_prompt_budget": 12000,
+    "summary_trigger_tokens": 8000,
+    "summarize_every_n_steps": 4
+  },
+  "observability": {
+    "json_logs": false,
+    "metrics_addr": ":8090",
+    "enable_pprof": false
+  },
+  "actor": {
+    "kind": "mock",
+    "name": "actor"
+  },
+  "reviewer": {
+    "kind": "mock",
+    "name": "reviewer"
+  },
+  "summarizer": {
+    "kind": "mock",
+    "name": "summarizer"
+  },
+  "tools": {
+    "files": {
+      "enabled": true,
+      "max_read_bytes": 1048576,
+      "max_write_bytes": 1048576,
+      "max_list_entries": 200
+    },
+    "shell": {
+      "enabled": false
+    },
+    "git": {
+      "enabled": false
+    },
+    "http": {
+      "enabled": false
+    },
+    "benchmark": {
+      "enabled": false
+    }
+  }
+}

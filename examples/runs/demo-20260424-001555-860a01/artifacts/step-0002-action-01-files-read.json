@@ -1,0 +1,19 @@
+{
+  "action": {
+    "tool": "files.read",
+    "args": {
+      "path": "demo.txt"
+    },
+    "reason": "Verify that the previous action really changed the workspace.",
+    "timeout_seconds": 10
+  },
+  "duration_ms": 0,
+  "result": {
+    "ok": true,
+    "summary": "file read",
+    "output": "hello from production harness",
+    "files": [
+      "demo.txt"
+    ]
+  }
+}

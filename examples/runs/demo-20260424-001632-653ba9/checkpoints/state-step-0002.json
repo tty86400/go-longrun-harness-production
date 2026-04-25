@@ -1,0 +1,92 @@
+{
+  "run_id": "demo-20260424-001632-653ba9",
+  "status": "running",
+  "objective": "Create and verify a deterministic demo artifact in the workspace.\n\nRequirements:\n1. Write a file named demo.txt.\n2. Read it back to confirm it exists and contains the expected text.\n3. Stop once the evidence is sufficient.\n",
+  "started_at": "2026-04-24T00:16:32.143575736Z",
+  "updated_at": "2026-04-24T00:16:32.149168399Z",
+  "ended_at": "0001-01-01T00:00:00Z",
+  "step": 2,
+  "resume_count": 0,
+  "consecutive_failures": 0,
+  "completed": false,
+  "rolling_summary": "Workspace is empty. Create a deterministic demo artifact first.\nThe file should now exist. Read it back as evidence.\nThe run is making steady progress and has real evidence in the workspace.",
+  "sticky_facts": [
+    "Workspace and artifacts are the durable source of truth.",
+    "Keep prompt context compact; summarize aggressively when needed."
+  ],
+  "plan": [
+    "Create demo file",
+    "Inspect the file",
+    "Finish with a concise summary"
+  ],
+  "todo": [
+    "Prefer evidence gathering over speculative edits.",
+    "Read demo.txt",
+    "Return final answer"
+  ],
+  "recent_events": [
+    {
+      "timestamp": "2026-04-24T00:16:32.145667761Z",
+      "step": 0,
+      "kind": "objective",
+      "actor": "system",
+      "content": "Create and verify a deterministic demo artifact in the workspace.\n\nRequirements:\n1. Write a file named demo.txt.\n2. Read it back to confirm it exists and contains the expected text.\n3. Stop once the evidence is sufficient.\n"
+    },
+    {
+      "timestamp": "2026-04-24T00:16:32.147529137Z",
+      "step": 1,
+      "kind": "actor_decision",
+      "actor": "actor",
+      "content": "{\"situation_assessment\":\"Workspace is empty. Create a deterministic demo artifact first.\",\"updated_plan\":[\"Create demo file\",\"Inspect the file\",\"Finish with a concise summary\"],\"updated_todo\":[\"Write demo.txt\",\"Read demo.txt\",\"Return final answer\"],\"actions\":[{\"tool\":\"files.write\",\"args\":{\"path\":\"demo.txt\",\"content\":\"hello from production harness\\n\",\"create_dirs\":true},\"reason\":\"Seed the workspace with a verifiable artifact.\",\"timeout_seconds\":10}],\"done\":false,\"final_answer\":\"\"}"
+    },
+    {
+      "timestamp": "2026-04-24T00:16:32.148341151Z",
+      "step": 1,
+      "kind": "tool_result",
+      "actor": "tool",
+      "tool": "files.write",
+      "ok": true,
+      "title": "Seed the workspace with a verifiable artifact.",
+      "content": "file written",
+      "artifact": "artifacts/step-0001-action-01-files-write.json"
+    },
+    {
+      "timestamp": "2026-04-24T00:16:32.149677813Z",
+      "step": 2,
+      "kind": "actor_decision",
+      "actor": "actor",
+      "content": "{\"situation_assessment\":\"The file should now exist. Read it back as evidence.\",\"updated_plan\":[\"Create demo file\",\"Inspect the file\",\"Finish with a concise summary\"],\"updated_todo\":[\"Read demo.txt\",\"Return final answer\"],\"actions\":[{\"tool\":\"files.read\",\"args\":{\"path\":\"demo.txt\"},\"reason\":\"Verify that the previous action really changed the workspace.\",\"timeout_seconds\":10}],\"done\":false,\"final_answer\":\"\"}"
+    },
+    {
+      "timestamp": "2026-04-24T00:16:32.150373678Z",
+      "step": 2,
+      "kind": "tool_result",
+      "actor": "tool",
+      "tool": "files.read",
+      "ok": true,
+      "title": "Verify that the previous action really changed the workspace.",
+      "content": "file read\nhello from production harness",
+      "artifact": "artifacts/step-0002-action-01-files-read.json"
+    },
+    {
+      "timestamp": "2026-04-24T00:16:32.151050687Z",
+      "step": 2,
+      "kind": "review",
+      "actor": "reviewer",
+      "content": "{\"progress_assessment\":\"The run is making steady progress and has real evidence in the workspace.\",\"done_items\":[\"Created or verified the demo artifact\"],\"missing_items\":[\"Return the final answer once verification is complete\"],\"risks\":[\"Do not keep issuing write actions after evidence is enough\"],\"next_priority\":\"Prefer evidence gathering over speculative edits.\",\"revised_plan\":[\"Create demo file\",\"Inspect the file\",\"Finish with a concise summary\"],\"updated_todo\":[\"Read demo.txt\",\"Return final answer\"],\"should_summarize\":false}"
+    }
+  ],
+  "memory_compactions": 0,
+  "last_summary_at_step": 0,
+  "stats": {
+    "steps": 2,
+    "actor_calls": 2,
+    "reviewer_calls": 1,
+    "summarizer_calls": 0,
+    "tool_calls": 2,
+    "tool_failures": 0,
+    "reviews": 1,
+    "summaries": 0,
+    "checkpoints": 2
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "run": {
+    "id_prefix": "generic",
+    "workspace": "./workspace",
+    "runs_dir": "./runs",
+    "persist_prompts": true,
+    "persist_provider_io": true
+  },
+  "prompt": {
+    "language": "zh-CN"
+  },
+  "loop": {
+    "max_steps": 120,
+    "max_actions_per_step": 3,
+    "step_timeout_seconds": 180,
+    "max_wall_clock_minutes": 240,
+    "max_consecutive_failures": 6
+  },
+  "review": {
+    "every_n_steps": 4
+  },
+  "memory": {
+    "recent_events": 16,
+    "estimated_prompt_budget": 12000,
+    "summary_trigger_tokens": 9000,
+    "summarize_every_n_steps": 8
+  },
+  "observability": {
+    "json_logs": true,
+    "metrics_addr": ":8080",
+    "enable_pprof": false
+  },
+  "actor": {
+    "kind": "generic_json",
+    "name": "generic-main",
+    "endpoint": "${GENERIC_API_ENDPOINT}",
+    "method": "POST",
+    "model": "${GENERIC_MODEL_NAME}",
+    "api_key_env": "GENERIC_API_KEY",
+    "auth_header": "Authorization",
+    "auth_prefix": "Bearer ",
+    "timeout_seconds": 90,
+    "temperature": 0.2,
+    "max_output_tokens": 1200,
+    "input_mode": "prompt",
+    "prompt_field_path": "input.prompt",
+    "prompt_template": "You are a coding agent.\n\n{{messages}}\n\n{{json_hint}}",
+    "response_text_path": "data.output_text",
+    "response_id_path": "data.id",
+    "json_mode_field_path": "input.response_format",
+    "json_mode_value": "json",
+    "body": {
+      "input": {
+        "response_format": "text"
+      }
+    },
+    "retry": {
+      "max_attempts": 4,
+      "initial_backoff_ms": 500,
+      "max_backoff_ms": 5000,
+      "jitter_ms": 250
+    }
+  },
+  "tools": {
+    "files": {
+      "enabled": true,
+      "max_read_bytes": 1048576,
+      "max_write_bytes": 1048576,
+      "max_list_entries": 200
+    },
+    "shell": {
+      "enabled": true,
+      "allowed_commands": ["go", "git", "ls", "cat", "mkdir", "rm", "cp", "mv", "find", "grep", "sed", "awk", "sh", "bash", "make"],
+      "denied_commands": ["sudo", "docker", "kubectl"],
+      "default_timeout_seconds": 60,
+      "max_output_bytes": 65536,
+      "env_allowlist": ["PATH", "HOME", "TMPDIR", "GOMODCACHE", "GOCACHE"]
+    },
+    "git": {
+      "enabled": true
+    },
+    "http": {
+      "enabled": false
+    },
+    "benchmark": {
+      "enabled": false
+    }
+  }
+}
